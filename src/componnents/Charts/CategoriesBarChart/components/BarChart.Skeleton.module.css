@@ -1,0 +1,49 @@
+.skeletonRoot {
+  padding: 12px;
+}
+
+.legendRow {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.legendItem {
+  height: 20px;
+  width: 90px;
+  border-radius: 12px;
+}
+
+.chartBox {
+  height: 360px;
+  position: relative;
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.barsGrid {
+  position: absolute;
+  inset: 16px;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 16px;
+  align-items: end;
+}
+
+.barCol {
+  display: grid;
+  gap: 6px;
+}
+
+.bar {
+  width: 100%;
+  height: var(--bar-h, 48px);
+  border-radius: 8px;
+}
+
+.barLabel {
+  width: 80%;
+  height: 10px;
+  border-radius: 8px;
+}

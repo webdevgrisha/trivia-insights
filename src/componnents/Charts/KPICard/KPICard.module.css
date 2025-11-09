@@ -1,0 +1,67 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  padding: 14px 16px;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  position: relative;
+  transition: transform 100ms ease, box-shadow 140ms ease,
+    border-color 120ms ease, background-color 120ms ease;
+}
+
+.card::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, #fff 6%, transparent),
+    transparent 38%
+  );
+  opacity: 0;
+  transition: opacity 140ms ease;
+}
+
+.card:hover {
+  transform: translateY(-1px);
+  border-color: var(--card-border-hover, #253244);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12), var(--shadow);
+  background: color-mix(in oklab, var(--bg-elev) 90%, #ffffff 10%);
+}
+
+.card:hover::after {
+  opacity: 1;
+}
+
+.card:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow);
+}
+
+.card:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--primary-weak), 0 6px 16px rgba(0, 0, 0, 0.1),
+    var(--shadow);
+  border-color: var(--ring);
+}
+
+.name {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+}
+
+.value {
+  color: var(--text);
+  font-weight: 700;
+  font-size: clamp(18px, 2.4vw, 24px);
+  line-height: 1.1;
+  word-break: break-word;
+}

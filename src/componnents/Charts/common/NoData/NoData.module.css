@@ -1,0 +1,9 @@
+.empty {
+  display: grid;
+  place-items: center;
+  height: 240px;
+  color: var(--muted);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.02);
+}

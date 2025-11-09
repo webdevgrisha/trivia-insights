@@ -1,0 +1,35 @@
+.list {
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  margin: 0;
+  list-style: none;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.02);
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+  scroll-behavior: smooth;
+}
+
+.list::-webkit-scrollbar {
+  height: 8px;
+}
+.list::-webkit-scrollbar-track {
+  background: transparent;
+}
+.list::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 999px;
+}
+
+.state {
+  color: var(--muted);
+  padding: 8px 10px;
+}
+
+.pillSkeleton {
+  border-radius: 999px;
+  box-shadow: none;
+}
