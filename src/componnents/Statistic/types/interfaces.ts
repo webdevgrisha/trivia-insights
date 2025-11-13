@@ -24,6 +24,11 @@ interface CategoryQuestionStatistic {
     total_hard_question_count: number;
 }
 
+interface KPICardConfig<T> {
+    key: keyof T;
+    name: string;
+}
+
 interface BarInfo {
     dataKey: string;
     name: string;
@@ -58,6 +63,7 @@ export type {
     Categories,
     CategoryStatistic,
     CategoryQuestionStatistic,
+    KPICardConfig,
     BarInfo,
     CategoryInfo,
     PieConfig,

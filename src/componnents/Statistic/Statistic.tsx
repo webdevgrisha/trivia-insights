@@ -1,5 +1,5 @@
 import { useSearchParams } from "react-router";
-import { TotalsStatistics } from "./components/TotalsStatistics/TotalsStatistic";
+import { TotalsStatistics } from "./components/TotalsStatistics/TotalStatistic";
 import { CategoryStatistics } from "./components/CategoryStatistic/CategoryStatistic";
 
 function Statistic() {
