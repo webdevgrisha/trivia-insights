@@ -10,6 +10,9 @@
   height: 100%;
 }
 
-.chartWrap :global(svg.recharts-surface:focus) {
+.chartWrap :global(.recharts-wrapper:focus),
+.chartWrap :global(.recharts-wrapper:focus-visible),
+.chartWrap :global(svg.recharts-surface:focus),
+.chartWrap :global(svg.recharts-surface:focus-visible) {
   outline: none !important;
 }

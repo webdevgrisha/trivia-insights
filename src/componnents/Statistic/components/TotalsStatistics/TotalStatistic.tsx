@@ -17,6 +17,7 @@ function TotalsStatistics() {
     const { categories, isLoading: isCategoriesLoading } = useCategories();
 
     const [activeTotalsID, setActiveTotalsID] = React.useState<string | null>(null);
+    const [selectedKPIKey, setSelectedKPIKey] = React.useState<string | null>(null);
 
     const loading = isLoading || isCategoriesLoading;
 
@@ -31,6 +32,13 @@ function TotalsStatistics() {
         return formatPieData(pieConfig, (activeCategoryTotals || {}) as PieFormatData)
     }, [activeCategoryTotals])
 
+    const handleSetSelectedKPIKey = React.useCallback((key: string | null) => {
+        const isNewValue = key !== selectedKPIKey;
+        const nextValue = isNewValue ? key : null;
+
+        setSelectedKPIKey(nextValue)
+    }, [selectedKPIKey])
+
     if (loading) {
         return <TotalStatisticSkeleton />
     }
@@ -42,14 +50,27 @@ function TotalsStatistics() {
                     {
                         kpiCardsConfig.map(({ key, name }) => {
                             const value = activeCategoryTotals?.[key];
+                            const isActive = selectedKPIKey === key;
 
-                            return <KPICard name={name} value={value} />
+                            return (
+                                <KPICard
+                                    key={key}
+                                    name={name}
+                                    value={value}
+                                    isActive={isActive}
+                                    onClick={() => handleSetSelectedKPIKey(key)}
+                                />
+                            )
                         })
                     }
                 </div>
 
                 <div className={styles.pieChartWrapper}>
-                    <StatusPieChart data={pieChartData} />
+                    <StatusPieChart
+                        data={pieChartData}
+                        onClick={handleSetSelectedKPIKey}
+                        activeKey={selectedKPIKey}
+                    />
                 </div>
             </div>
 

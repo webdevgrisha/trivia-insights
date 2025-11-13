@@ -6,7 +6,7 @@ function CustomXTick({
     const label = String(payload.value ?? "");
     const short = label.length > 16 ? label.slice(0, 15) + "…" : label;
     return (
-        <g transform={`translate(${x},${y})`}>
+        <g transform={`translate(${x},${y})`} style={{ pointerEvents: "none" }}>
             <text
                 className={styles.xTick}
                 textAnchor="end"

@@ -16,9 +16,18 @@ interface CategoryStatisticsProps {
 function CategoryStatistics({ categoryId }: CategoryStatisticsProps) {
     const { totals, isLoading } = useCategoryStatistics(categoryId);
 
+    const [selectedKPIKey, setSelectedKPIKey] = React.useState<string | null>(null);
+
     const pieChartData: PieInfo[] = React.useMemo(() => {
         return formatPieData(pieConfig, (totals || {}) as PieFormatData)
     }, [totals])
+
+    const handleSetSelectedKPIKey = React.useCallback((key: string | null) => {
+        const isNewValue = key !== selectedKPIKey;
+        const nextValue = isNewValue ? key : null;
+
+        setSelectedKPIKey(nextValue)
+    }, [selectedKPIKey])
 
     if (isLoading) {
         <CategoryStatisticSkeleton />
@@ -31,14 +40,27 @@ function CategoryStatistics({ categoryId }: CategoryStatisticsProps) {
                     {
                         kpiCardsConfig.map(({ key, name }) => {
                             const value = totals?.[key];
+                            const isActive = selectedKPIKey === key;
 
-                            return <KPICard name={name} value={value} />
+                            return (
+                                <KPICard
+                                    key={key}
+                                    name={name}
+                                    value={value}
+                                    isActive={isActive}
+                                    onClick={() => handleSetSelectedKPIKey(key)}
+                                />
+                            )
                         })
                     }
                 </div>
 
                 <div className={styles.pieChartWrapper}>
-                    <StatusPieChart data={pieChartData} />
+                    <StatusPieChart
+                        data={pieChartData}
+                        onClick={handleSetSelectedKPIKey}
+                        activeKey={selectedKPIKey}
+                    />
                 </div>
             </div>
         </div>

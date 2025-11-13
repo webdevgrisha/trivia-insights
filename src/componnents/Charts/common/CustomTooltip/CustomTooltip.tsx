@@ -8,12 +8,6 @@ function CustomTooltip({ active, payload, label }: TooltipContentProps<string | 
     const item = payload[0];
     const color = item.payload?.fill || undefined;
 
-    console.log({
-        active,
-        label,
-        payload,
-    });
-
     return (
         <div className={styles.tooltip}>
             <div className={styles.tooltipLabel}>{label}</div>

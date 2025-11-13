@@ -12,11 +12,11 @@ import {
 import styles from "./StatusPieChart.module.css";
 import { CustomLegend, CustomTooltip, NoData } from "../common";
 import type { PieInfo } from "../../Statistic/types/interfaces";
-import React from "react";
 
 interface StatusPieChartProps {
     data: PieInfo[];
-    onClick?: (key?: string | number) => void;
+    onClick?: (key: string | null) => void;
+    activeKey?: string | null;
     isAnimationActive?: boolean;
 }
 
@@ -27,11 +27,10 @@ function ActiveSector({ outerRadius, innerRadius, ...rest }: PieSectorDataItem) 
 function StatusPieChart({
     data,
     onClick,
+    activeKey,
     isAnimationActive = true,
 }: StatusPieChartProps) {
     const safeData = Array.isArray(data) ? data.filter(d => (d?.value ?? 0) > 0) : [];
-
-    const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
 
     if (safeData.length === 0) return <NoData />;
 
@@ -41,7 +40,9 @@ function StatusPieChart({
     return (
         <div className={styles.chartWrap}>
             <ResponsiveContainer width="100%" height="100%">
-                <PieChart onClick={() => setActiveIndex(null)}>
+                <PieChart onClick={() => {
+                    onClick?.(null)
+                }}>
                     <Legend
                         content={<CustomLegend />}
                         verticalAlign="top"
@@ -63,15 +64,15 @@ function StatusPieChart({
                         label={renderPctOnly}
                         labelLine={false}
                         onClick={(_: PieSectorDataItem, index, e) => {
-                            e?.stopPropagation();
+                            e.stopPropagation();
+
                             onClick?.(safeData[index]?.key);
-                            setActiveIndex(prev => (prev === index ? null : index));
                         }}
                         activeShape={ActiveSector}
                     >
-                        {safeData.map((cellInfo, i) => {
-                            const isActiveCell = activeIndex !== null;
-                            const fillOpacity = isActiveCell && activeIndex !== i ? 0.6 : 1;
+                        {safeData.map((cellInfo) => {
+                            const isActiveCell = activeKey !== null;
+                            const fillOpacity = isActiveCell && cellInfo.key !== activeKey ? 0.6 : 1;
 
                             return (
                                 <Cell
@@ -80,6 +81,7 @@ function StatusPieChart({
                                     stroke="var(--border)"
                                     strokeWidth={1}
                                     fillOpacity={fillOpacity}
+                                    style={{ cursor: onClick ? "pointer" : "default" }}
                                 />
                             )
                         })}

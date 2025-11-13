@@ -52,6 +52,7 @@ function CategoriesBarChart({
                         onClick(categoryId);
                         setSelectedXValue(selectValue)
                     }}
+                    style={{ cursor: "pointer" }}
                 >
                     <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
 
