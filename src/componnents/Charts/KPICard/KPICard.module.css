@@ -11,6 +11,8 @@
   position: relative;
   transition: transform 100ms ease, box-shadow 140ms ease,
     border-color 120ms ease, background-color 120ms ease;
+  text-align: left;
+  cursor: pointer;
 }
 
 .card::after {
@@ -37,6 +39,27 @@
 
 .card:hover::after {
   opacity: 1;
+}
+
+/* Активная карточка — как “зафиксированный” hover + акцент */
+.cardActive {
+  transform: translateY(-2px);
+  border-color: var(--primary);
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--primary) 40%, transparent),
+    0 8px 20px rgba(0, 0, 0, 0.18), var(--shadow);
+  background: color-mix(in oklab, var(--bg-elev) 80%, #ffffff 20%);
+}
+
+.cardActive::after {
+  opacity: 1;
+}
+
+.cardActive .name {
+  color: color-mix(in oklab, var(--primary) 70%, var(--muted) 30%);
+}
+
+.cardActive .value {
+  color: color-mix(in oklab, var(--text) 70%, var(--primary) 30%);
 }
 
 .card:active {

@@ -5,6 +5,8 @@ interface KPICardProps {
     value?: number;
     locale?: string;
     fractionDigits?: number;
+    isActive?: boolean;
+    onClick?: () => void;
 };
 
 function KPICard({
@@ -12,6 +14,8 @@ function KPICard({
     value,
     locale,
     fractionDigits = 0,
+    isActive = false,
+    onClick,
 }: KPICardProps) {
     const hasValue = value !== null && value !== undefined && !Number.isNaN(value);
 
@@ -25,10 +29,14 @@ function KPICard({
         : "—";
 
     return (
-        <div className={`${styles.card}`}>
+        <button
+            type="button"
+            className={`${styles.card} ${isActive ? styles.cardActive : ""}`}
+            onClick={onClick}
+        >
             <span className={styles.name}>{name}</span>
             <span className={styles.value}>{formatted}</span>
-        </div>
+        </button>
     );
 }
 
