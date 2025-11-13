@@ -44,8 +44,10 @@ function CategoriesBarChart({
                     onClick={({ activeIndex }: MouseHandlerDataParam) => {
                         const selectedGroup = activeIndex !== null ? safeData[Number(activeIndex)] : null;
 
-                        const categoryId = selectedGroup?.id || null;
-                        const selectValue = selectedGroup?.[xKey] || null;
+                        const isNewValue = selectedGroup?.[xKey] !== selectedXValue;
+
+                        const categoryId = (isNewValue && selectedGroup?.id) || null;
+                        const selectValue = (isNewValue && selectedGroup?.[xKey]) || null;
 
                         onClick(categoryId);
                         setSelectedXValue(selectValue)

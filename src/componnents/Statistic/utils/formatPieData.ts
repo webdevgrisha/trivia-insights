@@ -8,6 +8,7 @@ function formatPieData(config: PieConfig[], initData: PieFormatData): PieInfo[] 
             value: initData[key],
             name,
             fill,
+            key
         }
 
         pieInfoArr.push(pieInfo);

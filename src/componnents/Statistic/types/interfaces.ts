@@ -45,6 +45,7 @@ interface PieConfig {
 type PieFormatData = Record<string, number>
 
 interface PieInfo {
+    key: string;
     name: string;
     value: number | null;
     fill: string;

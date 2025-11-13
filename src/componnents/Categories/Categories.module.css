@@ -16,9 +16,11 @@
 .list::-webkit-scrollbar {
   height: 8px;
 }
+
 .list::-webkit-scrollbar-track {
   background: transparent;
 }
+
 .list::-webkit-scrollbar-thumb {
   background: var(--border);
   border-radius: 999px;
