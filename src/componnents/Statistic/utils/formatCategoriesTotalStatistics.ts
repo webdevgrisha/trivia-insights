@@ -1,8 +1,8 @@
 import type { CategoryName } from '../../Categories/types/interfaces';
-import type { CategoryQuestionStatistic } from '../components/CategoryStatistic/types/interfaces';
+import type { TotalStatistic } from '../components/TotalsStatistics/types/interfaces';
 
 function formatCategoriesTotalStatistics(
-  categoriesTotals: CategoryQuestionStatistic,
+  categoriesTotals: Record<string, TotalStatistic>,
   categoriesNames: CategoryName[]
 ) {
   const categoriesNamesMap = categoriesNames.reduce(

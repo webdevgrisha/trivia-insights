@@ -1,4 +1,4 @@
-import { formatCategoriesTotalStatistics } from './formatCategories';
+import { formatCategoriesTotalStatistics } from './formatCategoriesTotalStatistics';
 import { formatPieData } from './formatPieData';
 import { loadQuestionsWithProgress } from './loadQuestionsWithProgress';
 

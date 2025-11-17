@@ -1,6 +1,6 @@
 import useSWR from 'swr';
 import { openTDBFetcher } from '../../../../../http/openTDBFetcher';
-import type { AllCategoriesStatistics } from '../../../types/interfaces';
+import type { AllCategoriesStatistics } from '../types/interfaces';
 
 function useAllCategoriesStatistics() {
   const { data, error, isLoading } = useSWR<AllCategoriesStatistics>(

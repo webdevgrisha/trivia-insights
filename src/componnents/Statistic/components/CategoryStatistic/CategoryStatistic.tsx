@@ -19,6 +19,11 @@ function CategoryStatistics({ categoryId }: CategoryStatisticsProps) {
     setShowExtra((prev) => !prev);
   };
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  React.useEffect(() => {
+    setShowExtra(false);
+  }, [categoryId]);
+
   return (
     <div className={layoutStyles.statisticRoot}>
       <CategoryTotalsStatistics totals={totals} isLoading={isLoading} isError={isError} />
@@ -27,11 +32,12 @@ function CategoryStatistics({ categoryId }: CategoryStatisticsProps) {
         className={styles.toggleButton}
         onClick={handleToggleExtra}
         aria-expanded={showExtra}
+        disabled={isLoading || !!isError}
       >
         {showExtra ? 'Hide question type statistics' : 'Show question type statistics'}
       </button>
 
-      {showExtra && !isError && (
+      {showExtra && (
         <CategoryQuestionsStatistics
           categoryId={categoryId}
           questionCount={totals?.total_question_count || 0}
