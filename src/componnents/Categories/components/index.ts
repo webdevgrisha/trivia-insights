@@ -1,7 +1,4 @@
-import { Category } from './Category/Category'
-import { CategoriesSkeleton } from './Skeleton/CategoriesSkeleton'
+import { Category } from './Category/Category';
+import { CategoriesSkeleton } from './Skeleton/CategoriesSkeleton';
 
-export {
-    Category,
-    CategoriesSkeleton
-}
+export { Category, CategoriesSkeleton };

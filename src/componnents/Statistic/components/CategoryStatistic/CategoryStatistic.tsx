@@ -1,72 +1,44 @@
-import React from "react";
-import { KPICard } from "../../../Charts";
-import { StatusPieChart } from "../../../Charts/StatusPieChart/StatusPieChart";
-import { useCategoryStatistics } from "../../hooks/useCategoryStatistics";
-import type { PieFormatData, PieInfo } from "../../types/interfaces";
+import React from 'react';
 
-import styles from './CategoryStatistic.module.css'
-import { formatPieData } from "../../utils";
-import { CategoryStatisticSkeleton } from "./components/TotalStatisticSkeleton/CategoryStatisticSkeleton";
-import { kpiCardsConfig, pieConfig } from "./config/chartsConfigs";
+import layoutStyles from '../StatisticLayout.module.css';
+import styles from './CategoryStatistic.module.css';
+import { CategoryQuestionsStatistics } from './components';
+import { CategoryTotalsStatistics } from './components/CategoryTotalsStatistics/CategoryTotalsStatistics';
+import { useCategoryStatistics } from './hooks/useCategoryStatistics';
 
 interface CategoryStatisticsProps {
-    categoryId: string;
+  categoryId: string;
 }
 
 function CategoryStatistics({ categoryId }: CategoryStatisticsProps) {
-    const { totals, isLoading } = useCategoryStatistics(categoryId);
+  const { totals, isLoading, isError } = useCategoryStatistics(categoryId);
 
-    const [selectedKPIKey, setSelectedKPIKey] = React.useState<string | null>(null);
+  const [showExtra, setShowExtra] = React.useState(false);
 
-    const pieChartData: PieInfo[] = React.useMemo(() => {
-        return formatPieData(pieConfig, (totals || {}) as PieFormatData)
-    }, [totals])
+  const handleToggleExtra = () => {
+    setShowExtra((prev) => !prev);
+  };
 
-    const handleSetSelectedKPIKey = React.useCallback((key: string | null) => {
-        const isNewValue = key !== selectedKPIKey;
-        const nextValue = isNewValue ? key : null;
+  return (
+    <div className={layoutStyles.statisticRoot}>
+      <CategoryTotalsStatistics totals={totals} isLoading={isLoading} isError={isError} />
+      <button
+        type="button"
+        className={styles.toggleButton}
+        onClick={handleToggleExtra}
+        aria-expanded={showExtra}
+      >
+        {showExtra ? 'Hide question type statistics' : 'Show question type statistics'}
+      </button>
 
-        setSelectedKPIKey(nextValue)
-    }, [selectedKPIKey])
-
-    if (isLoading) {
-        <CategoryStatisticSkeleton />
-    }
-
-    return (
-        <div className={styles.totalStatistic}>
-            <div className={styles.topGrid}>
-                <div className={styles.kpiGrid}>
-                    {
-                        kpiCardsConfig.map(({ key, name }) => {
-                            const value = totals?.[key];
-                            const isActive = selectedKPIKey === key;
-
-                            return (
-                                <KPICard
-                                    key={key}
-                                    name={name}
-                                    value={value}
-                                    isActive={isActive}
-                                    onClick={() => handleSetSelectedKPIKey(key)}
-                                />
-                            )
-                        })
-                    }
-                </div>
-
-                <div className={styles.pieChartWrapper}>
-                    <StatusPieChart
-                        data={pieChartData}
-                        onClick={handleSetSelectedKPIKey}
-                        activeKey={selectedKPIKey}
-                    />
-                </div>
-            </div>
-        </div>
-    );
+      {showExtra && !isError && (
+        <CategoryQuestionsStatistics
+          categoryId={categoryId}
+          questionCount={totals?.total_question_count || 0}
+        />
+      )}
+    </div>
+  );
 }
 
-export {
-    CategoryStatistics
-}
+export { CategoryStatistics };

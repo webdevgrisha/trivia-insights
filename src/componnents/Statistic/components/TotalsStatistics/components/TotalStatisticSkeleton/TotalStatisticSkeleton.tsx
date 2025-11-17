@@ -1,30 +1,33 @@
-import { BarChartSkeleton } from "../../../../../Charts/CategoriesBarChart/components/BarChart.Skeleton";
-import { KPICardSkeleton } from "../../../../../Charts/KPICard/components/KPICard.Skeleton";
-import { PieChartSkeleton } from "../../../../../Charts/StatusPieChart/components/PieChart.Skeleton";
-
-import styles from '../../TotalStatistic.module.css'
+import { BarChartSkeleton } from '../../../../../Charts/CategoriesBarChart/components/BarCahrtSkeleton/BarChartSkeleton';
+import { KPICardSkeleton } from '../../../../../Charts/KPICard/components/KPICardSkeleton/KPICardSkeleton';
+import { PieChartSkeleton } from '../../../../../Charts/StatusPieChart/components/PieChartSkeleton/PieChartSkeleton';
+import styles from '../../../StatisticLayout.module.css';
 
 function TotalStatisticSkeleton() {
-    return (
-        <div className={styles.totalStatistic}>
-            <div className={styles.topGrid}>
-                <div className={styles.kpiGrid}>
-                    <KPICardSkeleton />
-                    <KPICardSkeleton />
-                    <KPICardSkeleton />
-                    <KPICardSkeleton />
-                </div>
-                <div className={styles.pieChartWrapper}>
-                    <PieChartSkeleton />
-                </div>
-            </div>
-            <div className={styles.barChartWrapper}>
-                <BarChartSkeleton />
-            </div>
+  return (
+    <div className={styles.statisticRoot}>
+      <section className={styles.statisticSection}>
+        <div className={styles.statisticKpiPieGrid}>
+          <div className={styles.statisticKpiGrid}>
+            <KPICardSkeleton />
+            <KPICardSkeleton />
+            <KPICardSkeleton />
+            <KPICardSkeleton />
+          </div>
+
+          <div className={styles.statisticPieWrapper}>
+            <PieChartSkeleton />
+          </div>
         </div>
-    );
+      </section>
+
+      <section className={styles.statisticSection}>
+        <div className={styles.statisticBarWrapper}>
+          <BarChartSkeleton />
+        </div>
+      </section>
+    </div>
+  );
 }
 
-export {
-    TotalStatisticSkeleton
-}
+export { TotalStatisticSkeleton };

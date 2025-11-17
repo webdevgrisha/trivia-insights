@@ -1,16 +1,20 @@
 .list {
+  scroll-behavior: smooth;
+  scrollbar-color: var(--border) transparent;
+  scrollbar-width: thin;
+
+  overflow-x: auto;
   display: flex;
   gap: 8px;
-  padding: 8px;
+
   margin: 0;
-  list-style: none;
-  overflow-x: auto;
+  padding: 8px;
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  background: rgba(255, 255, 255, 0.02);
-  scrollbar-width: thin;
-  scrollbar-color: var(--border) transparent;
-  scroll-behavior: smooth;
+
+  list-style: none;
+
+  background: rgb(255 255 255 / 2%);
 }
 
 .list::-webkit-scrollbar {
@@ -22,16 +26,11 @@
 }
 
 .list::-webkit-scrollbar-thumb {
-  background: var(--border);
   border-radius: 999px;
+  background: var(--border);
 }
 
 .state {
-  color: var(--muted);
   padding: 8px 10px;
-}
-
-.pillSkeleton {
-  border-radius: 999px;
-  box-shadow: none;
+  color: var(--muted);
 }

@@ -1,17 +1,15 @@
-import useSWR from "swr"
-import type { Categories } from "../types/interfaces"
-import { fetcher } from "../../../http/fetcher"
+import useSWR from 'swr';
+import { openTDBFetcher } from '../../../http/openTDBFetcher';
+import type { Categories } from '../types/interfaces';
 
 function useCategories() {
-    const { data, error, isLoading } = useSWR<Categories>('api_category.php', fetcher)
+  const { data, error, isLoading } = useSWR<Categories>('api_category.php', openTDBFetcher);
 
-    return {
-        categories: data?.trivia_categories || [],
-        isError: error,
-        isLoading
-    }
+  return {
+    categories: data?.trivia_categories || [],
+    isError: error,
+    isLoading,
+  };
 }
 
-export {
-    useCategories
-}
+export { useCategories };

@@ -1,11 +1,10 @@
-type Categories = { trivia_categories: CategoryName[] }
+interface Categories {
+  trivia_categories: CategoryName[];
+}
 
 interface CategoryName {
-    id: number;
-    name: string;
+  id: number;
+  name: string;
 }
 
-export type {
-    Categories,
-    CategoryName
-}
+export type { Categories, CategoryName };

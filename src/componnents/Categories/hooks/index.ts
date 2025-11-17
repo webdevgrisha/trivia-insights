@@ -1,7 +1,4 @@
-import { useCategories } from "./useCategories";
-import { useCategoryFilter } from "./useCategoryFilter";
+import { useCategories } from './useCategories';
+import { useCategoryFilter } from './useCategoryFilter';
 
-export {
-    useCategories,
-    useCategoryFilter
-}
+export { useCategories, useCategoryFilter };

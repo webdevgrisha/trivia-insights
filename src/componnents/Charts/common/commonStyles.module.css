@@ -1,8 +1,8 @@
 .dot {
+  flex: 0 0 10px;
   width: 10px;
   height: 10px;
   border-radius: 99px;
-  flex: 0 0 10px;
 }
 
 .series {
@@ -11,6 +11,6 @@
 
 .value {
   margin-left: auto;
-  color: var(--text);
   font-variant-numeric: tabular-nums;
+  color: var(--text);
 }

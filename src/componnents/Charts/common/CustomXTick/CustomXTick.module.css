@@ -1,4 +1,4 @@
 .xTick {
-  fill: var(--muted);
   font-size: 12px;
+  fill: var(--muted);
 }

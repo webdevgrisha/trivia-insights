@@ -1,89 +1,93 @@
-import React from "react";
-import { useCategories } from "../../../Categories/hooks/useCategories";
-import { KPICard } from "../../../Charts";
-import { CategoriesBarChart } from "../../../Charts/CategoriesBarChart/CategoriesBarChart";
-import { useAllCategoriesStatistics } from "../../hooks/useAllCategoriesStatistics";
-import type { PieFormatData, PieInfo } from "../../types/interfaces";
-
-import styles from "./TotalStatistic.module.css";
-import { StatusPieChart } from "../../../Charts/StatusPieChart/StatusPieChart";
-import { formatCategoriesTotalStatistics, formatPieData } from "../../utils";
-import { TotalStatisticSkeleton } from "./components/TotalStatisticSkeleton/TotalStatisticSkeleton";
-import { barInfo, kpiCardsConfig, pieConfig } from "./config/chartsConfigs";
-
+import React from 'react';
+import { useCategories } from '../../../Categories/hooks/useCategories';
+import { CategoriesBarChart } from '../../../Charts/CategoriesBarChart/CategoriesBarChart';
+import { ChartTitle } from '../../../Charts/common';
+import type { PieInfo } from '../../../Charts/StatusPieChart/types/interfaces';
+import { ErrorStatus } from '../../../Statuses';
+import type { PieFormatData } from '../../types/interfaces';
+import { formatCategoriesTotalStatistics, formatPieData } from '../../utils';
+import { KPIAndPieSection } from '../KPIAndPieSection/KPIAndPieSection';
+import layoutStyles from '../StatisticLayout.module.css';
+import { TotalStatisticSkeleton } from './components/TotalStatisticSkeleton/TotalStatisticSkeleton';
+import { barInfo, kpiCardsConfig, pieConfig } from './config/chartsConfigs';
+import { useAllCategoriesStatistics } from './hooks/useAllCategoriesStatistics';
+import styles from './TotalStatistic.module.css';
+import type { TotalStatistic } from './types/interfaces';
 
 function TotalsStatistics() {
-    const { allTotals, categoriesTotals, isLoading } = useAllCategoriesStatistics();
-    const { categories, isLoading: isCategoriesLoading } = useCategories();
+  const {
+    allTotals,
+    categoriesTotals,
+    isLoading: isTotalsLoading,
+    isError: isTotalsError,
+  } = useAllCategoriesStatistics();
 
-    const [activeTotalsID, setActiveTotalsID] = React.useState<string | null>(null);
-    const [selectedKPIKey, setSelectedKPIKey] = React.useState<string | null>(null);
+  const {
+    categories,
+    isLoading: isCategoriesLoading,
+    isError: isCategoriesError,
+  } = useCategories();
 
-    const loading = isLoading || isCategoriesLoading;
+  const [activeTotalsID, setActiveTotalsID] = React.useState<string | null>(null);
+  const [selectedKPIKey, setSelectedKPIKey] = React.useState<keyof TotalStatistic | null>(null);
 
-    const activeCategoryTotals =
-        activeTotalsID ? categoriesTotals?.[activeTotalsID] : allTotals;
+  const loading = isTotalsLoading || isCategoriesLoading;
+  const hasError = isTotalsError || isCategoriesError;
 
-    const barChartData = React.useMemo(() => {
-        return formatCategoriesTotalStatistics(categoriesTotals || {}, categories || {})
-    }, [categories, categoriesTotals]);
+  const activeCategoryTotals = activeTotalsID ? categoriesTotals?.[activeTotalsID] : allTotals;
 
-    const pieChartData: PieInfo[] = React.useMemo(() => {
-        return formatPieData(pieConfig, (activeCategoryTotals || {}) as PieFormatData)
-    }, [activeCategoryTotals])
+  const barChartData = React.useMemo(
+    () => formatCategoriesTotalStatistics(categoriesTotals || {}, categories || {}),
+    [categories, categoriesTotals]
+  );
 
-    const handleSetSelectedKPIKey = React.useCallback((key: string | null) => {
-        const isNewValue = key !== selectedKPIKey;
-        const nextValue = isNewValue ? key : null;
+  const pieChartData: PieInfo[] = React.useMemo(
+    () => formatPieData(pieConfig, (activeCategoryTotals || {}) as PieFormatData),
+    [activeCategoryTotals]
+  );
 
-        setSelectedKPIKey(nextValue)
-    }, [selectedKPIKey])
+  const handleSetSelectedKPIKey = React.useCallback((key: keyof TotalStatistic | null) => {
+    setSelectedKPIKey((prev) => (prev === key ? null : key));
+  }, []);
 
-    if (loading) {
-        return <TotalStatisticSkeleton />
-    }
-
+  if (hasError) {
     return (
-        <div className={styles.totalStatistic}>
-            <div className={styles.topGrid}>
-                <div className={styles.kpiGrid}>
-                    {
-                        kpiCardsConfig.map(({ key, name }) => {
-                            const value = activeCategoryTotals?.[key];
-                            const isActive = selectedKPIKey === key;
-
-                            return (
-                                <KPICard
-                                    key={key}
-                                    name={name}
-                                    value={value}
-                                    isActive={isActive}
-                                    onClick={() => handleSetSelectedKPIKey(key)}
-                                />
-                            )
-                        })
-                    }
-                </div>
-
-                <div className={styles.pieChartWrapper}>
-                    <StatusPieChart
-                        data={pieChartData}
-                        onClick={handleSetSelectedKPIKey}
-                        activeKey={selectedKPIKey}
-                    />
-                </div>
-            </div>
-
-            <div className={styles.barChartWrapper}>
-                <CategoriesBarChart
-                    barInfo={barInfo}
-                    data={barChartData}
-                    onClick={(id: string | null) => setActiveTotalsID(id)}
-                />
-            </div>
-        </div>
+      <div className={layoutStyles.statisticStatus}>
+        <ErrorStatus
+          title="Failed to load statistics"
+          text="Please check your connection and try again."
+        />
+      </div>
     );
+  }
 
+  if (loading) {
+    return <TotalStatisticSkeleton />;
+  }
+
+  return (
+    <div className={layoutStyles.statisticRoot}>
+      <KPIAndPieSection<TotalStatistic>
+        kpiConfig={kpiCardsConfig}
+        totals={activeCategoryTotals}
+        pieData={pieChartData}
+        selectedKPIKey={selectedKPIKey}
+        onSelectKPI={handleSetSelectedKPIKey}
+        title="Total statistics"
+      />
+
+      <section className={layoutStyles.statisticSection}>
+        <ChartTitle title="Statistics by category" />
+        <div className={styles.statisticBarWrapper}>
+          <CategoriesBarChart
+            barInfo={barInfo}
+            data={barChartData}
+            onClick={(id: string | null) => setActiveTotalsID(id)}
+          />
+        </div>
+      </section>
+    </div>
+  );
 }
 
 export { TotalsStatistics };

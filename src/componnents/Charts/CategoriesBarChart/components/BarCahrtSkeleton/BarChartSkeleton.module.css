@@ -9,22 +9,24 @@
 }
 
 .legendItem {
-  height: 20px;
   width: 90px;
+  height: 20px;
   border-radius: 12px;
 }
 
 .chartBox {
-  height: 360px;
   position: relative;
+
+  height: 360px;
+  padding: 16px;
   border: 1px dashed var(--border);
   border-radius: 8px;
-  padding: 16px;
 }
 
 .barsGrid {
   position: absolute;
   inset: 16px;
+
   display: grid;
   grid-template-columns: repeat(8, 1fr);
   gap: 16px;

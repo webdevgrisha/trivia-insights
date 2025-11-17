@@ -1,18 +1,23 @@
-type Params = Record<string, string | number | boolean | undefined>;
+import { httpConfig } from '../config/httpConfig';
 
-export async function fetcher<T>(url: string, params?: Params): Promise<T> {
-    const baseURL = "https://opentdb.com/";
-    const endpoint = new URL(url, baseURL);
+export type HttpParams = Record<string, string | number | boolean | undefined>;
 
-    if (params) {
-        Object.entries(params).forEach(([k, v]) => {
-            if (v !== undefined && v !== null) endpoint.searchParams.set(k, String(v));
-        });
-    }
+export async function fetcher<T>(
+  url: string,
+  params?: HttpParams,
+  options?: RequestInit
+): Promise<T> {
+  const endpoint = new URL(url, httpConfig.baseURL);
 
-    const res = await fetch(endpoint.toString(), { method: "GET" });
+  if (params) {
+    Object.entries(params).forEach(([k, v]) => {
+      if (v !== undefined && v !== null) endpoint.searchParams.set(k, String(v));
+    });
+  }
 
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  const res = await fetch(endpoint.toString(), { method: 'GET', ...options });
 
-    return res.json() as Promise<T>;
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+  return res.json() as Promise<T>;
 }

@@ -2,11 +2,6 @@
   display: flex;
   gap: 12px;
   align-items: center;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  background: rgba(255, 255, 255, 0.02);
-  padding: 10px 12px;
-  color: var(--text, #fff);
 }
 
 .stateIcon {
@@ -15,12 +10,16 @@
 }
 
 .stateTitle {
-  font-weight: 600;
   margin: 0;
+  font-weight: 600;
 }
 
 .stateText {
   margin: 2px 0 0;
-  color: var(--muted);
   font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.stateAction {
+  margin-left: auto;
 }

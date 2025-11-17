@@ -1,39 +1,35 @@
-import React from "react";
-import { useSearchParams } from "react-router";
+import React from 'react';
+import { useSearchParams } from 'react-router';
 
 function useCategoryFilter(isLoading: boolean) {
-    const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
 
-    const activeId = searchParams.get("category") ?? "0";
+  const activeId = searchParams.get('category') ?? '0';
 
-    const setActiveCategory = React.useCallback(
-        (id: string) => {
-            if (id === "0") {
-                setSearchParams({}, { replace: true });
-            } else {
-                setSearchParams({ category: id }, { replace: true });
-            }
-        },
-        [setSearchParams]
-    );
+  const setActiveCategory = React.useCallback(
+    (id: string) => {
+      if (id === '0') {
+        setSearchParams({}, { replace: true });
+      } else {
+        setSearchParams({ category: id }, { replace: true });
+      }
+    },
+    [setSearchParams]
+  );
 
-    React.useLayoutEffect(() => {
-        if (isLoading) return;
+  React.useLayoutEffect(() => {
+    if (isLoading) return;
 
-        const btn = document.querySelector<HTMLButtonElement>(
-            `[data-category-id="${activeId}"]`
-        );
+    const btn = document.querySelector<HTMLButtonElement>(`[data-category-id="${activeId}"]`);
 
-        btn?.scrollIntoView({
-            block: "nearest",
-            inline: "center",
-            behavior: "auto",
-        });
-    }, [activeId, isLoading]);
+    btn?.scrollIntoView({
+      block: 'nearest',
+      inline: 'center',
+      behavior: 'auto',
+    });
+  }, [activeId, isLoading]);
 
-    return { activeId, setActiveCategory };
+  return { activeId, setActiveCategory };
 }
 
-export {
-    useCategoryFilter
-}
+export { useCategoryFilter };

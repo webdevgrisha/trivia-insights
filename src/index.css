@@ -4,22 +4,21 @@
   --text: #e6ebf2;
   --muted: #9aa6b2;
   --primary: #59a6ff;
-  --primary-weak: rgba(89, 166, 255, 0.15);
+  --primary-weak: rgb(89 166 255 / 15%);
   --border: #1f2a37;
   --ring: #7cc4ff;
-
   --radius: 14px;
-  --shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
-
-  --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter,
-    "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+  --shadow: 0 6px 20px rgb(0 0 0 / 45%);
+  --font:
+    ui-sans-serif, system-ui, -apple-system, segoe ui, roboto, inter, "Helvetica Neue", arial,
+    "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
 }
 
 html,
 body,
 #root {
   height: 100%;
-  background: var(--bg);
-  color: var(--text);
   font-family: var(--font);
+  color: var(--text);
+  background: var(--bg);
 }

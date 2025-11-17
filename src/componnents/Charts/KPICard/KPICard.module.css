@@ -1,40 +1,51 @@
 .card {
+  cursor: pointer;
+
+  position: relative;
+
   display: flex;
   flex-direction: column;
   gap: 6px;
+
   width: 100%;
   padding: 14px 16px;
-  background: var(--bg-elev);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  position: relative;
-  transition: transform 100ms ease, box-shadow 140ms ease,
-    border-color 120ms ease, background-color 120ms ease;
+
   text-align: left;
-  cursor: pointer;
+
+  background: var(--bg-elev);
+  box-shadow: var(--shadow);
+
+  transition:
+    transform 100ms ease,
+    box-shadow 140ms ease,
+    border-color 120ms ease,
+    background-color 120ms ease;
 }
 
 .card::after {
-  content: "";
   pointer-events: none;
+  content: "";
+
   position: absolute;
   inset: 0;
+
   border-radius: inherit;
-  background: linear-gradient(
-    180deg,
-    color-mix(in oklab, #fff 6%, transparent),
-    transparent 38%
-  );
+
   opacity: 0;
+  background: linear-gradient(180deg, color-mix(in oklab, #fff 6%, transparent), transparent 38%);
+
   transition: opacity 140ms ease;
 }
 
 .card:hover {
   transform: translateY(-1px);
   border-color: var(--card-border-hover, #253244);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12), var(--shadow);
-  background: color-mix(in oklab, var(--bg-elev) 90%, #ffffff 10%);
+  background: color-mix(in oklab, var(--bg-elev) 90%, #fff 10%);
+  box-shadow:
+    0 6px 16px rgb(0 0 0 / 12%),
+    var(--shadow);
 }
 
 .card:hover::after {
@@ -44,17 +55,39 @@
 .cardActive {
   transform: translateY(-2px);
   border-color: color-mix(in oklab, var(--border) 70%, var(--primary) 30%);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18), var(--shadow);
-  background: color-mix(in oklab, var(--bg-elev) 85%, #ffffff 15%);
+  background: color-mix(in oklab, var(--bg-elev) 85%, #fff 15%);
+  box-shadow:
+    0 8px 20px rgb(0 0 0 / 18%),
+    var(--shadow);
 }
 
 .cardActive::after {
   opacity: 1;
-  background: linear-gradient(
-    180deg,
-    color-mix(in oklab, #fff 8%, transparent),
-    transparent 45%
-  );
+  background: linear-gradient(180deg, color-mix(in oklab, #fff 8%, transparent), transparent 45%);
+}
+
+.card:focus-visible {
+  border-color: color-mix(in oklab, var(--border) 55%, var(--primary) 45%);
+  outline: none;
+  box-shadow:
+    0 0 0 2px color-mix(in oklab, var(--primary-weak) 70%, transparent),
+    0 6px 16px rgb(0 0 0 / 10%),
+    var(--shadow);
+}
+
+.name {
+  font-size: 12px;
+  line-height: 1.2;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
+
+.value {
+  font-size: clamp(18px, 2.4vw, 24px);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--text);
+  overflow-wrap: break-word;
 }
 
 .cardActive .name {
@@ -63,27 +96,4 @@
 
 .cardActive .value {
   color: color-mix(in oklab, var(--text) 80%, var(--primary) 20%);
-}
-
-.card:focus-visible {
-  outline: none;
-  border-color: color-mix(in oklab, var(--border) 55%, var(--primary) 45%);
-  box-shadow: 0 0 0 2px
-      color-mix(in oklab, var(--primary-weak) 70%, transparent),
-    0 6px 16px rgba(0, 0, 0, 0.1), var(--shadow);
-}
-
-.name {
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.2;
-  letter-spacing: 0.02em;
-}
-
-.value {
-  color: var(--text);
-  font-weight: 700;
-  font-size: clamp(18px, 2.4vw, 24px);
-  line-height: 1.1;
-  word-break: break-word;
 }

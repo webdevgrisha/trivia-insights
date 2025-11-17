@@ -1,18 +1,21 @@
 header {
   position: sticky;
-  top: 0;
   z-index: 10;
-  background: linear-gradient(180deg, #0d141c 0%, #0b0f14 100%);
-  border-bottom: 1px solid var(--border);
+  top: 0;
+
   padding: 14px 18px;
+  border-bottom: 1px solid var(--border);
+
   font-weight: 600;
   letter-spacing: 0.2px;
+
+  background: linear-gradient(180deg, #0d141c 0%, #0b0f14 100%);
 }
 
 main {
-  padding: 18px;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 18px;
 }
 
 nav {
@@ -20,24 +23,27 @@ nav {
 }
 
 .card {
-  background: var(--bg-elev);
+  padding: 16px;
   border: 1px solid var(--border);
   border-radius: var(--radius);
+
+  background: var(--bg-elev);
   box-shadow: var(--shadow);
-  padding: 16px;
 }
 
 .sectionTitle {
+  margin: 0 0 10px;
   font-size: 14px;
   color: var(--muted);
-  margin: 0 0 10px;
 }
 
 .chartWrap {
-  background: var(--bg-elev);
+  overflow: hidden;
+
+  padding: 12px;
   border: 1px solid var(--border);
   border-radius: var(--radius);
+
+  background: var(--bg-elev);
   box-shadow: var(--shadow);
-  padding: 12px;
-  overflow: hidden;
 }
