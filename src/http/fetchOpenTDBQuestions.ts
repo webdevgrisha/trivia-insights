@@ -1,12 +1,12 @@
 import { ResponseCodeEnum } from '../types/enums';
-import type { Question, QuestionResponse } from '../types/interfaces';
+import type { QuestionData, QuestionResponse } from '../types/interfaces';
 import type { HttpParams } from './fetcher';
 import { openTDBFetcher } from './openTDBFetcher';
 
 async function fetchOpenTDBQuestions(
   params: HttpParams,
   options?: RequestInit
-): Promise<Question[]> {
+): Promise<QuestionData[]> {
   const data = await openTDBFetcher<QuestionResponse>('api.php', params, options);
 
   switch (data.response_code) {

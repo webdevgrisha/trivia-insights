@@ -1,6 +1,6 @@
 const httpConfig = {
   baseURL: 'https://opentdb.com/',
-  minIntervalMs: 5100,
+  minIntervalMs: 5500,
   maxQuestionCountPerRequest: 50,
 };
 

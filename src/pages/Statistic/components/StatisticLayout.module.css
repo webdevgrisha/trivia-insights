@@ -1,0 +1,77 @@
+.statisticRoot {
+  display: grid;
+  gap: 16px;
+}
+
+.statisticSection {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.statisticKpiPieGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-items: stretch;
+}
+
+.statisticKpiGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.statisticPieWrapper {
+  min-height: 330px;
+}
+
+.statisticStatus {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 260px;
+  padding: 16px;
+  border-radius: 8px;
+
+  background: var(--bg-elev, #111827);
+}
+
+.link {
+  margin-top: 12px;
+  color: var(--accent, #38bdf8);
+  text-decoration: underline;
+}
+
+@media (width <= 960px) {
+  .statisticKpiPieGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .statisticPieWrapper {
+    height: 320px;
+  }
+}
+
+@media (width <= 560px) {
+  .statisticKpiGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (width <= 960px) {
+  .statisticKpiPieGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .statisticPieWrapper {
+    height: 320px;
+  }
+}
+
+@media (width <= 560px) {
+  .statisticKpiGrid {
+    grid-template-columns: 1fr;
+  }
+}

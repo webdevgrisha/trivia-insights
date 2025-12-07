@@ -7,7 +7,7 @@ interface TokenResponse {
   token: string;
 }
 
-interface Question {
+interface QuestionData {
   type: QuestionType;
   difficulty: QuestionDifficulty;
   category: string;
@@ -18,7 +18,12 @@ interface Question {
 
 interface QuestionResponse {
   response_code: ResponseCodeEnum;
-  results: Question[];
+  results: QuestionData[];
 }
 
-export type { TokenResponse, Question, QuestionResponse };
+interface CacheEntry<T> {
+  data: T;
+  expiresAt: number | null;
+}
+
+export type { TokenResponse, QuestionData, QuestionResponse, CacheEntry };

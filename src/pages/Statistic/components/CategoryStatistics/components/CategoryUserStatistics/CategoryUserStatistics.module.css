@@ -1,0 +1,39 @@
+/* CategoryUserStatistics.module.css */
+
+.link {
+  cursor: pointer;
+
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 12px;
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted);
+  text-decoration: none;
+
+  background: transparent;
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.05s ease;
+}
+
+.link:hover {
+  transform: translateY(-1px);
+  border-color: #9ca3af;
+  color: #e5e7eb;
+  background: #111827;
+}
+
+.link:active {
+  transform: translateY(0);
+}

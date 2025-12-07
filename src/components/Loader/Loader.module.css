@@ -1,0 +1,26 @@
+.loader {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+
+  padding: 18px 0;
+
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--border);
+  border-top-color: #f9fafb;
+  border-radius: 50%;
+
+  animation: loader-spin 0.7s linear infinite;
+}
+
+@keyframes loader-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

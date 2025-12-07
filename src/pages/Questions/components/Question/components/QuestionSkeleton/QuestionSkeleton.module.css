@@ -1,0 +1,51 @@
+.card {
+  margin-bottom: 16px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+
+  background: #05080c;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.category {
+  width: 120px;
+  height: 16px;
+}
+
+.difficulty {
+  width: 70px;
+  height: 18px;
+}
+
+.questionBlock {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.questionLineLong {
+  width: 80%;
+  height: 18px;
+}
+
+.questionLineShort {
+  width: 55%;
+  height: 14px;
+}
+
+.options {
+  display: grid;
+  gap: 8px;
+}
+
+.option {
+  width: 100%;
+  height: 32px;
+}
