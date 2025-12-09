@@ -1,6 +1,6 @@
 import { fetchOpenTDBQuestions } from '../../../http/fetchOpenTDBQuestions';
 import { fetchOpenTDBToken } from '../../../http/fetchOpenTDBToken';
-import type { Question } from '../../../types/interfaces';
+import type { QuestionData } from '../../../types/interfaces';
 import { sleep } from '../../../utils';
 
 const MAX_QUESTION_COUNT_PER_REQUEST = 50;
@@ -18,7 +18,7 @@ async function loadQuestionsWithProgress({
   questionCount,
   onProgress,
   signal,
-}: LoadQuestionWithProgressProps): Promise<Question[]> {
+}: LoadQuestionWithProgressProps): Promise<QuestionData[]> {
   if (questionCount === 0) return [];
 
   if (signal?.aborted) {
@@ -30,7 +30,7 @@ async function loadQuestionsWithProgress({
   let currQuestionCount = questionCount;
   let loadedCount = 0;
 
-  const allQuestions: Question[] = [];
+  const allQuestions: QuestionData[] = [];
 
   while (currQuestionCount > 0) {
     if (signal?.aborted) {

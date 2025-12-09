@@ -45,7 +45,7 @@
 
   font-size: 13px;
   font-weight: 500;
-  color: #c5d0dc; /* чуть светлее, чем var(--muted) */
+  color: #c5d0dc;
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -69,5 +69,5 @@
   transform: translateY(-1px);
   border-color: var(--border);
   color: var(--text);
-  background: rgb(255 255 255 / 5%); /* мягкий серый/синий фон */
+  background: rgb(255 255 255 / 5%);
 }
